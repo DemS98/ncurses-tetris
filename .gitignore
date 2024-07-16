@@ -1,0 +1,7 @@
+# Exclude VSCode directory
+
+.vscode/
+
+# Exclude binaries
+
+tetris
