@@ -5,10 +5,10 @@ Tetris implementation with [Ncurses](https://tldp.org/HOWTO/NCURSES-Programming-
 ## Required dependencies
 
 * *g++*
+* *libncurses-dev*
 * When compiling with sound support:
     * *libasound2-dev*
     * *libopusfile-dev*
-    * *libncurses-dev*
 
 Example Debian installation:
 
