@@ -1,7 +1,5 @@
 #include "tetramine.h"
 #include "matrix.h"
-#include <stdexcept>
-#include <algorithm>
 #include <cmath>
 
 using namespace tetris;

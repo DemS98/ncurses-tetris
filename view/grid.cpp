@@ -1,8 +1,7 @@
 #include "grid.h"
 #include <string>
-#include <thread>
-#include <chrono>
 #include <iostream>
+#include <unistd.h>
 
 using namespace tetris::view;
 
@@ -106,7 +105,7 @@ void Grid::drawScore(unsigned int oldScore, unsigned int newScore) {
 
     while (oldScore < newScore) {
         drawScore(++oldScore);
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        usleep(10 * 1000);
     }
 }
 

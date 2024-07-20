@@ -318,6 +318,7 @@ int main() {
             }
 
             while (matrix.collapse()) {
+                usleep(350 * 1000);
                 grid.clearMatrix();
                 drawMatrixTetramines(grid, tetramines);
                 grid.drawScore(score, score + 100);
