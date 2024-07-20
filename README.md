@@ -5,9 +5,10 @@ Tetris implementation with [Ncurses](https://tldp.org/HOWTO/NCURSES-Programming-
 ## Required dependencies
 
 * *g++*
-* *libasound2-dev*
-* *libopusfile-dev*
-* *libncurses-dev*
+* When compiling with sound support:
+    * *libasound2-dev*
+    * *libopusfile-dev*
+    * *libncurses-dev*
 
 Example Debian installation:
 
@@ -22,6 +23,8 @@ Just run `make`.
 To remove intermediate object files, `make clean`
 
 > Tetris theme will be embedded inside the binary
+
+To compile without sound: `make no_sound`
 
 ## Play
 

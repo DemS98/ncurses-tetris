@@ -1,11 +1,16 @@
 #include "view/grid.h"
 #include "engine/bag.h"
 #include "engine/matrix.h"
+#include <chrono>
+#include <unistd.h>
+
+#ifndef NO_SOUND
+
 #include <opusfile.h>
 #include <alsa/asoundlib.h>
-#include <chrono>
 #include <thread>
 #include <atomic>
+
 
 // first opus byte
 extern const unsigned char _binary_tetris_theme_opus_start[];
@@ -147,6 +152,8 @@ int playback_volume(long volume)
     return volume;
 }
 
+#endif
+
 
 void drawUI(tetris::view::Grid& grid, unsigned int score) {
     grid.drawMatrix();
@@ -175,6 +182,9 @@ int main() {
     long time = 0;
     tetris::view::Grid grid;
     tetris::Matrix matrix;
+
+    #ifndef NO_SOUND
+
     int volume = playback_volume(-1);
 
     std::atomic<bool> stop(false);
@@ -183,7 +193,9 @@ int main() {
         play_sound(stop);
     });
 
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    #endif
+
+    sleep(1);
 
     drawUI(grid, score);
 
@@ -240,12 +252,18 @@ int main() {
                             tetramine->move(tetris::Movement::LEFT);
                         }
                         break;
+                    
+                    #ifndef NO_SOUND
+                    
                     case '+':
                         volume = playback_volume(volume + 10 < 100 ? volume + 10 : 100);
                         break;
                     case '-':
                         volume = playback_volume(volume - 10 > 0 ? volume - 10 : 0);
                         break;
+                    
+                    #endif
+                    
                     case ERR:
                         int moveTimePassed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() - moveTime;
                     
@@ -280,9 +298,13 @@ int main() {
                     delete tetramine;
                 }
 
+                #ifndef NO_SOUND
+
                 stop = true;
 
                 music.join();
+
+                #endif
 
                 timeout(-1);
                 
